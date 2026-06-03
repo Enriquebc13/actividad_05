@@ -1,4 +1,4 @@
-import {Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { Cat } from './entities/cat.entity';
 import { CatsService } from './cats.service';
 
@@ -8,5 +8,12 @@ export class CatsController {
     @Get()
     findAll(): Cat[] {
         return this.catsService.findAll();
+    }
+
+    @Get(':id')
+    getCat(
+        @Param('id') id: string
+    ): string | Cat {
+        return this.catsService.getCat(parseInt(id));
     }
 }
