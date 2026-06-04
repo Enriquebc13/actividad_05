@@ -48,7 +48,7 @@ export class CatsService {
         return newCat;
     }
 
-        updateCat(id: number, updateCatDto: UpdateCatDto): Cat | string {
+    updateCat(id: number, updateCatDto: UpdateCatDto): Cat | string {
         const cat = this.cats.find(cat => cat.id === id);
 
         if (!cat) {
@@ -68,5 +68,14 @@ export class CatsService {
         }
 
         return cat;
+    }
+
+    deleteCat(id: number): string {
+        const deleteCat = this.cats.find(item => item.id === id);
+        if (!deleteCat) {
+            return "El gato no fue encontrado"
+        }
+        this.cats = this.cats.filter(item => item.id !== id)
+        return "Gato eliminado"
     }
 }

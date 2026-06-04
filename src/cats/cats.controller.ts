@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { Cat } from './entities/cat.entity';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dtos/create-cat.dto';
@@ -29,5 +29,12 @@ export class CatsController {
         @Param('id') id: string,
         @Body() updateCatDto: UpdateCatDto) {
         return this.catsService.updateCat(Number(id), updateCatDto);
+    }
+
+    @Delete(':id')
+    deleteCat(
+        @Param('id') id: string
+    ): string | Cat {
+        return this.catsService.deleteCat(parseInt(id));
     }
 }
