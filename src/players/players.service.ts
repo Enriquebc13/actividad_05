@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Player } from './entities/player.entity';
 import { CreatePlayerDto } from './dtos/create-player.dto';
+import { UpdatePlayerDto } from './dtos/update-player.dto';
 
 @Injectable()
 export class PlayersService {
@@ -50,5 +51,35 @@ export class PlayersService {
         };
         this.players.push(newplayer);
         return newplayer;
+    }
+
+    updatePlayer(id: number, UpdatePlayerDto: UpdatePlayerDto): Player | string {
+        const player = this.players.find(item => item.id === id);
+
+        if (!player) {
+            return 'Jugador no encontrado';
+        }
+
+        if (UpdatePlayerDto.firstName !== undefined) {
+            player.firstName = UpdatePlayerDto.firstName;
+        }
+
+        if (UpdatePlayerDto.lastName !== undefined) {
+            player.lastName = UpdatePlayerDto.lastName;
+        }
+
+        if (UpdatePlayerDto.age !== undefined) {
+            player.age = UpdatePlayerDto.age;
+        }
+
+        if (UpdatePlayerDto.position !== undefined) {
+            player.position = UpdatePlayerDto.position;
+        }
+
+        if (UpdatePlayerDto.nationality !== undefined) {
+            player.nationality = UpdatePlayerDto.nationality;
+        }
+
+        return player;
     }
 }
