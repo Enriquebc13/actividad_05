@@ -1,4 +1,13 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { PlayersService } from './players.service';
+import { Player } from './entities/player.entity';
 
 @Controller('players')
-export class PlayersController {}
+export class PlayersController {
+    constructor(private playerService: PlayersService) {}
+
+    @Get()
+    findAll() : Player[] {
+        return this.playerService.findAll();
+    }
+}
