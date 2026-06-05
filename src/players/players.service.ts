@@ -82,4 +82,14 @@ export class PlayersService {
 
         return player;
     }
+
+    deletePlayer(id: number): string {
+        const deletePlayer = this.players.find(item => item.id === id);
+        if (!deletePlayer) {
+            return "El Jugador no fue encontrado"
+        }
+        this.players = this.players.filter(item => item.id !== id)
+        return "Jugador eliminado"
+    }
+
 }
