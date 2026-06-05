@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Player } from './entities/player.entity';
+import { CreatePlayerDto } from './dtos/create-player.dto';
 
 @Injectable()
 export class PlayersService {
@@ -42,4 +43,12 @@ export class PlayersService {
         return cat;
     }
 
+    createPlayer(createPlayerDto: CreatePlayerDto): Player {
+        const newplayer: Player = {
+            id: Date.now(),
+            ...createPlayerDto,
+        };
+        this.players.push(newplayer);
+        return newplayer;
+    }
 }
