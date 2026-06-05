@@ -33,4 +33,13 @@ export class PlayersService {
     findAll(): Player[] {
         return this.players
     }
+
+    getPlayer(id: number): string | Player {
+        const cat = this.players.find(item => item.id === id)
+        if (!cat) {
+            return "Jugador no encontrado"
+        }
+        return cat;
+    }
+
 }
