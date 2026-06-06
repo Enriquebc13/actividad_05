@@ -15,7 +15,7 @@ export class PlayersController {
     }
 
     @Get(':id')
-    getCat(
+    getPlayer(
         @Param('id') id: string
     ): string | Player {
         return this.playerService.getPlayer(parseInt(id));
