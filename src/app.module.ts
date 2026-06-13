@@ -5,10 +5,24 @@ import { CatsModule } from './cats/cats.module';
 import { PlayersModule } from './players/players.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { APP_GUARD } from '@nestjs/core';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [CatsModule, PlayersModule, AuthModule, UsersModule],
+  imports: [ 
+    ConfigModule.forRoot({ isGlobal: true }),
+    CatsModule, 
+    PlayersModule, 
+    AuthModule, 
+    UsersModule
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard
+    }
+  ],
 })
 export class AppModule {}
